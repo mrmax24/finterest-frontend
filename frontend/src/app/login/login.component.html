@@ -1,0 +1,93 @@
+<div class="login">
+  <div class="header">
+    <div class="logodescription">
+      <div class="logotype3">
+        <div class="logo3">
+          <div class="logo-child7"></div>
+          <div class="logo-child8"></div>
+          <div class="logo-child9"></div>
+        </div>
+        <b class="finterest3">finterest</b>
+      </div>
+    </div>
+    <div class="btns4">
+      <button class="buttons11" primary id="buttons1" (click)="goToRegisterPage()">
+        <b class="button11">Sign up</b>
+      </button>
+      <button class="buttons12" secondary id="buttons2" (click)="goToLoginPage()">
+        <b class="button12">Sign in</b>
+      </button>
+    </div>
+  </div>
+  <form class="all-content2" method="post" action="${pageContext.request.contextPath}/login">
+    <div class="htxt5">
+      <h1 class="welcome-back">Welcome back</h1>
+      <p class="sign-in-for">Sign in for smarter money management</p>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div class="btnlink">
+      <div class="input-field20">
+        <b class="placeholder10">Email</b>
+        <input
+          class="input-field21"
+          type="email"
+          name="username"
+          placeholder="example@email.com"
+          maxlength
+          minlength
+          required
+          [(ngModel)]="loginData.login"
+        />
+      </div>
+      <div class="fieldtxt">
+        <div class="input-field20">
+          <b class="placeholder10">Password</b>
+          <input
+            class="input-field23"
+            type="password"
+            name="password"
+            placeholder="Create password"
+            maxlength
+            minlength="{4}"
+            required
+            [(ngModel)]="loginData.password"
+          />
+        </div>
+        <div class="forget-password">Forget Password?</div>
+      </div>
+    </div>
+    <div class="btnlink">
+      <button class="buttons13" (click)="login()" type="submit">
+        <b class="button13">Sign in</b>
+      </button>
+      <div style="font-size: 16px; color: red;">
+      </div>
+      <div class="txtbtn-link">
+        <div class="dont-have-an">Don’t have an account?</div>
+        <a class="sign-up" (click)="goToRegisterPage()" >Sign up</a>
+      </div>
+    </div>
+  </form>
+  <div class="bottom-txt">
+    <div class="footer">
+      <div class="copyright-2023">
+        Copyright © 2023 Finterest Company. All rights reserved.
+      </div>
+      <div class="finterest-your-container">
+        <b
+        >Finterest - your ultimate personal money manager tool for budget
+          control and expense management.
+        </b>
+        <span
+        >Unlike other accounting software, Finterest is designed to be
+              user-friendly and accessible to individuals of all backgrounds.
+              Whether you're a busy professional or a homemaker, Finterest
+              simplifies your financial routine, making money management a
+              delightful experience.
+            </span>
+      </div>
+    </div>
+  </div>
+</div>

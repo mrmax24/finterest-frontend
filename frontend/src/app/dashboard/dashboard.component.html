@@ -1,0 +1,468 @@
+<html>
+<div class="main">
+  <nav class="site-bar">
+    <div class="logotype">
+      <div class="logo">
+        <div class="logo-child"></div>
+        <div class="logo-item"></div>
+        <div class="logo-inner"></div>
+      </div>
+      <b class="finterest">finterest</b>
+    </div>
+    <ul class="side-bar">
+      <li class="sitebar-item">
+
+
+
+        <a href="dashboard">Overview</a>
+      </li>
+
+      <li class="sitebar-item">
+
+
+
+        <a href="accounts">Accounts</a>
+      </li>
+
+      <li class="sitebar-item">
+
+
+        <a href="report">Reports</a>
+      </li>
+
+      <li class="sitebar-item">
+
+
+        <a href="#">Transaction</a>
+      </li>
+
+      <li class="sitebar-item">
+
+
+        <a href="#">Savings</a>
+      </li>
+
+      <li class="sitebar-item">
+
+
+        <a href="#">Budgets</a>
+      </li>
+
+      <li class="sitebar-item">
+
+
+        <a href="#">Settings</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="main-part">
+    <div class="hnotification-profile">
+      <div class="h">Overviews</div>
+      <div class="avanotification">
+        <div class="avanamearrow">
+          <i class="fas fa-circle-user fa-lg" style="color: #b9b9b9; font-size: 32px;"></i>
+          <button class="namearrow" id="namearrow">
+            <div class="alice-johnson">{{ userInfo.userName }}</div>
+            <button class="icon-arrowcircledown" id="iconArrowcircledown">
+            </button>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="dashboards">
+      <div class="all">
+        <div class="left-part">
+          <div class="cash">
+            <div class="div">₴{{ userInfo.currentBalance }}</div>
+            <div class="h1">Current balance</div>
+          </div>
+          <div class="my-accounts">
+            <div class="hbtn-add">
+              <div class="h2">My accounts</div>
+              <button class="button-icon" id="buttonIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                  <line x1="256" y1="112" x2="256" y2="400" style="fill:none;stroke:white;stroke-linecap:round;
+                  stroke-linejoin:round;stroke-width:32px"/><line x1="400" y1="256" x2="112" y2="256" style="fill:none;stroke:white;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg>                <style>
+                  img {
+                    filter: invert(100%) sepia(0%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
+                  }
+                </style>
+              </button>
+            </div>
+            <div *ngFor="let account of userInfo.userAccounts" class="item-account">
+              <div class="h3">{{ account.name }}</div>
+              <div class="div1">{{ account.balance }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="savings" id="savings">
+          <div class="hbtn-add1">
+            <div class="h2">Savings</div>
+            <div class="button-small">
+              <div class="see-all">See all</div>
+
+
+            </div>
+          </div>
+          <div class="list-items">
+            <div class="all-txtpercentage">
+              <div class="all-txt">
+                <div class="h-">
+                  <div class="trip-to-vienna">Trip to Vienna</div>
+                  <div class="div3">50%</div>
+                </div>
+                <div class="process">
+                  <div class="process-child"></div>
+                  <div class="process-item"></div>
+                </div>
+                <div class="price">
+                  <b class="see-all">$1 500,00</b>
+                  <div class="h6">of $3 000,00</div>
+                </div>
+              </div>
+            </div>
+            <div class="all-txtpercentage">
+              <div class="all-txt">
+                <div class="h-">
+                  <div class="trip-to-vienna">MINI Cooper S 2016</div>
+                  <div class="div3">13%</div>
+                </div>
+                <div class="process">
+                  <div class="process-child"></div>
+                  <div class="rectangle-div"></div>
+                </div>
+                <div class="price">
+                  <b class="see-all">$1 580,00</b>
+                  <div class="h6">of $12 000,00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-a-transactionlast">
+          <div class="add-a-transaction">
+            <div class="htab">
+              <div class="h2">Create expense</div>
+              <div class="tab">
+                <div class="tab1">
+                  <div class="see-all">Expense</div>
+                </div>
+                <div class="tab3">
+                  <div class="see-all">Income</div>
+                </div>
+                <div class="tab3">
+                  <div class="see-all">Transfer</div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdowns">
+              <div class="labeldropdown">
+                <b class="from-account">From account</b>
+                  <select class="dropdown" [(ngModel)]="transactionRequestDto.accountId">
+                    <option *ngFor="let account of userInfo.userAccounts" [value]="account.id">{{ account.name }}</option>
+                  </select>
+              </div>
+              <div class="labeldropdown">
+                <b class="from-account">Category</b>
+                <select class="dropdown" [(ngModel)]="transactionRequestDto.categoryId">
+                  <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
+                </select>
+            </div>
+            </div>
+            <div class="amountnotedate">
+              <div class="amountcurrency">
+                <div class="input-field">
+                  <b class="placeholder">Amount*</b>
+                  <input
+                    class="input-field1"
+                    type="number"
+                    name="amount"
+                    placeholder="0.00"
+                    [(ngModel)]="transactionRequestDto.amount"
+                  maxlength
+                    minlength
+                  />
+                </div>
+                <div class="labeldropdown2">
+                  <b class="placeholder">Currency</b>
+                  <select class="dropdown2" name="currency" [(ngModel)]="transactionRequestDto.currency">
+                    <option value="UAH">UAH</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                  </select>
+                </div>
+              </div>
+              <div class="notedate">
+                <div class="input-field2">
+                  <b class="from-account">Note</b>
+                  <input
+                    class="input-field3"
+                    type="text"
+                    name="note"
+                    placeholder="Write your note"
+                    [(ngModel)]="transactionRequestDto.note"
+                    maxlength
+                    minlength
+                  />
+                </div>
+                <div class="input-field4">
+                  <b class="from-account">Date</b>
+                  <input
+                    class="input-field3"
+                    type="text"
+                    id=""
+                    name="date"
+                    [(ngModel)]="transactionRequestDto.date"
+                    maxlength
+                    minlength
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="btns">
+              <div class="checkboxtxt">
+                <input class="checkbox" type="checkbox" />
+                <div class="see-all">Create template</div>
+              </div>
+              <div class="buttons-primary">
+                <button (click)="addTransaction()" class="button">Add expense</button>
+              </div>
+            </div>
+      </div>
+
+      <div class="transactions">
+        <div class="table-cell">
+          <div class="column">
+            <div class="cell">
+              <div class="date">Date</div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="cell">
+              <div class="date1">Account</div>
+            </div>
+          </div>
+          <div class="column2">
+            <div class="cell2">
+              <div class="date">Category</div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="cell">
+              <div class="date1">Note</div>
+            </div>
+          </div>
+          <div class="column4">
+            <div class="cell4">
+              <div class="date">Amount</div>
+            </div>
+          </div>
+          <div class="column4">
+            <div class="cell4">
+              <div class="date">Edit</div>
+            </div>
+          </div>
+        </div>
+        <div class="table-cell1" *ngFor="let transaction of transactions">
+          <div class="column">
+            <div class="cell">
+              <div class="date">{{ transaction.date }}</div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="cell">
+              <div class="date7">{{ transaction.account }}</div>
+            </div>
+          </div>
+          <div class="column2">
+            <div class="cell2">
+              <b class="date">{{ transaction.categoryName }}</b>
+            </div>
+          </div>
+          <div class="column">
+            <div class="cell">
+              <div class="date1">{{ transaction.note }}</div>
+            </div>
+          </div>
+          <div class="column10">
+            <div class="cell4">
+              <div class="date">-₴{{ transaction.amount }}</div>
+            </div>
+          </div>
+
+
+
+          <div class="column11">
+            <div class="cell4">
+                <button class="date11" id="date" (click)="openPopup()">Edit</button>
+            </div>
+          </div>
+        </div>
+
+          <div class="popup-overlay" *ngIf="isPopupOpen">
+              <div class="pop-up-edit">
+                <div class="hexit3">
+                  <div class="htxt3">
+                    <div class="h21">Edit transaction</div>
+                    <div class="change-transaction-data">Change transaction data</div>
+                  </div>
+                  <button class="buttons-exit" (click)="closePopup()"></button>
+                </div>
+              </div>
+
+
+              <form class="add-a-transaction1" method="post" id="edit" action="${pageContext.request.contextPath}/dashboard/edit/${transaction.id}">
+                <div class="dropdowns2">
+                  <div class="labeldropdown6">
+                    <b class="label4">From account</b>
+                    <select class="dropdown6" name="account" size="{58}">
+                    </select>
+                  </div>
+                  <div class="labeldropdown6">
+                    <b class="label4">Category</b>
+                    <select class="dropdown6" name="category">
+
+                    </select>
+                  </div>
+                </div>
+                <div class="amountnotedate1">
+                  <div class="amountcurrency1">
+                    <div class="input-field10">
+                      <b class="placeholder5">Amount*</b>
+                      <input
+                        class="input-field11"
+                        type="text"
+                        name="amount"
+                        placeholder="0.00"
+                        maxlength
+                        minlength
+
+                      />
+                    </div>
+                    <div class="labeldropdown8">
+                      <b class="placeholder5">Currency</b>
+                      <select class="dropdown8" name="currency">
+                        <option value="UAH">UAH</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="notedate1">
+                    <div class="input-field12">
+                      <b class="placeholder6">Note</b>
+                      <input
+                        class="input-field13"
+                        type="text"
+                        name="note"
+                        placeholder="Write your note"
+                        maxlength
+                        minlength
+                      />
+                    </div>
+                    <div class="input-field14">
+                      <b class="placeholder6">Date</b>
+                      <input
+                        class="input-field13"
+                        type="input"
+                        id="date-input"
+                        name="date"
+                        maxlength
+                        minlength
+                        id="current-date"
+                        current-date="date"
+                      />
+                    </div>
+                  </div>
+                  <button class="buttons-primary" type="submit">Save</button>
+                </div>
+              </form>
+
+
+                <button class="buttons-delete" type="submit">Delete transaction</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="popUpLogOut" class="popup-overlay" style="display: none">
+  <div class="pop-up-log-out">
+    <div class="hexit2">
+      <div class="htxt2">
+        <div class="h20">Name</div>
+        <div class="exampleemailcom"></div>
+      </div>
+      <button class="buttons-exit" data-popup-index="1"></button>
+    </div>
+    <div class="create-new-account2">
+
+      <button class="buttons7">
+        <b class="button7"><a href="javascript:void(0);" class="logout-btn" (click)="logout()" style="color: #fff">Log out</a></b>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="popUpAddAccount" class="popup-overlay" style="display: none">
+  <div class="pop-up-add-account">
+    <div class="hexit4">
+      <div class="htxt4">
+        <div class="h22">Add account</div>
+        <div class="enter-your-account">Enter your account details</div>
+      </div>
+      <button class="icon-exit8" id="popupiconExit">
+        <div class="icon-exit9">
+
+
+        </div>
+      </button>
+    </div>
+    <form method="post" id="add-dashboard-account" action="${pageContext.request.contextPath}/dashboard/add-account">
+      <div class="create-new-account3">
+        <div class="hinputs2">
+          <div class="hinputs2">
+            <div class="inputs1">
+              <div class="input-field16">
+                <b class="placeholder8">Account name</b>
+                <input
+                  class="input-field17"
+                  type="text"
+                  name="account_name"
+                  placeholder="Your account name"
+                  maxlength
+                  minlength
+                  required
+                />
+              </div>
+              <div class="input-field16">
+                <b class="placeholder8">Starting balance </b>
+                <input
+                  class="input-field17"
+                  type="text"
+                  name="account_balance"
+                  placeholder="Enter the amount"
+                  maxlength
+                  minlength
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="buttons10" type="submit">
+          <b class="button10">Create</b>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</html>
+
+
+
+
+

@@ -1,0 +1,100 @@
+<div class="register">
+  <div class="header1">
+    <div class="logodescription1">
+      <div class="logotype1">
+        <div class="logo1">
+          <div class="rectangle-div"></div>
+          <div class="logo-child1"></div>
+          <div class="logo-child2"></div>
+        </div>
+        <b class="finterest1">finterest</b>
+      </div>
+    </div>
+    <div class="btns1">
+      <button class="buttons3" primary id="buttons1" (click)="goToRegisterPage()">
+        <b class="button3">Sign up</b>
+      </button>
+      <button class="buttons4" secondary id="buttons2" (click)="goToLoginPage()">
+        <b class="button4">Sign in</b>
+      </button>
+    </div>
+  </div>
+  <div class="all-content2">
+    <div class="htxt1">
+      <h1 class="welcome-to-finterest">Welcome to Finterest</h1>
+      <p class="start-your-financial">
+        Start your financial journey: Sign up for our personal finance
+        manager
+      </p>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <div class="inputs1">
+        <div class="names">
+          <div class="input-field4">
+            <b class="placeholder2">Name</b>
+            <input
+              class="input-field5"
+              type="text"
+              name="login"
+              placeholder="Your name"
+              [(ngModel)]="user.login"
+
+            />
+          </div>
+        </div>
+        <div class="input-field6">
+          <b class="placeholder2">Email</b>
+          <input
+            class="input-field5"
+            type="email"
+            name="email"
+            placeholder="example@email.com"
+            [(ngModel)]="user.email"
+          />
+        </div>
+        <div class="htxt1">
+          <div class="input-field6">
+            <b class="placeholder2">Password</b>
+            <input
+              class="input-field9"
+              type="password"
+              name="password"
+              placeholder="Create password"
+              [(ngModel)]="user.password"
+            />
+          </div>
+          <div class="icontxt">
+            <img class="icon-info" alt="" src="https://raw.githubusercontent.com/mrmax24/finterest-app/bc07107bdacd281eab38149d3a0af635d86e659d/src/main/resources/public/icon--info.svg">
+            <div class="passwords-must-have-container">
+              <span class="passwords-must-have">Passwords must have at least</span>
+              <b class="character-and-has"> 8 characters and include lowercase, uppercase, number, and a special character</b>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inputs1">
+        <button class="buttons5" (click)="registerUser()" type="submit">
+          <b class="button5">Sign up</b>
+        </button>
+        <div class="txtbtn-link1">
+          <div class="already-have-an">Already have an account?</div>
+          <a class="sign-in" (click)="goToLoginPage()" >Sign in</a>
+        </div>
+      </div>
+  </div>
+  <div class="bottom-txt1">
+    <div class="footer1">
+      <div class="copyright-20231">
+        Copyright © 2023 Finterest Company. All rights reserved.
+      </div>
+      <div class="finterest-your-container1">
+        <b>Finterest - your ultimate personal money manager tool for budget control and expense management.</b>
+        <span> Unlike other accounting software, Finterest is designed to be user-friendly and accessible to individuals of all backgrounds. Whether you're a busy professional or a homemaker, Finterest simplifies your financial routine, making money management a delightful experience.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
