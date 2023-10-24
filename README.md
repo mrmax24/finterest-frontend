@@ -1,28 +1,23 @@
-# AngularApp
-
+# <img src="https://github.com/mrmax24/finterest-app/blob/main/src/main/resources/public/logo1.png?raw=true" align="center" width=35px> Finterest 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
-## Development server
+## Project description:
+```bash
+Financial management tool that helps users track their expenses, savings, and
+income securely and confidentially. Developed using Hibernate and Spring frameworks,
+it ensures reliable data storage and retrieval ensuring user privacy is maintained.
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### [Link to the website](http://finterest-env.eba-dxmkaffn.eu-north-1.elasticbeanstalk.com)
 
-## Code scaffolding
+## How to use the app:
+1. Register and log in;
+2. Create an account with a budget on the "Overview" page;
+3. Add the expenses you have incurred for the day;
+4. You can enter an amount in another currency and save the conversion in the primary currency;
+5. Try to edit and delete an expense in your expense history;
+6. Create another account and add certain expenses to it;
+7. Go to the "Reports" tab in the menu and explore your expenses using different combination of criteria;
+8. Go to the "Accounts" tab in the menu and try to edit the information in your account or delete it and create new one;
+9. Try to log out of the app and log back in;
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# finterest-frontend

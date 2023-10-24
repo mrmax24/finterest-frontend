@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { AuthService } from '../auth.service';
-import { environment } from '../../../../environment';
 
 interface UserInfoDto {
   userName: string;
