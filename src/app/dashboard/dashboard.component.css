@@ -1572,6 +1572,13 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+.popup-styles {
+  display: flex;
+  z-index: 100;
+  background-color: rgba(113, 113, 113, 0.2);
+  align-items: center;
+  justify-content: center;
+}
 
 
 

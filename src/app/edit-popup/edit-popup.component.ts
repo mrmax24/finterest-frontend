@@ -10,6 +10,8 @@ export class EditPopupComponent {
   @Input() closable: boolean = true;
   @Output() closePopup: EventEmitter<void> = new EventEmitter<void>();
 
+  popupStyles: any = {};
+
   openPopup() {
     this.isOpen = true;
   }

@@ -300,8 +300,9 @@
             </div>
           </div>
         </div>
+      </div>
 
-          <div class="popup-overlay" *ngIf="isPopupOpen">
+          <div class="popup-overlay popup-styles" *ngIf="isPopupOpen">
               <div class="pop-up-edit">
                 <div class="hexit3">
                   <div class="htxt3">
@@ -310,7 +311,6 @@
                   </div>
                   <button class="buttons-exit" (click)="closePopup()"></button>
                 </div>
-              </div>
 
 
               <form class="add-a-transaction1" method="post" id="edit" action="${pageContext.request.contextPath}/dashboard/edit/${transaction.id}">
@@ -388,6 +388,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <div id="popUpLogOut" class="popup-overlay" style="display: none">
   <div class="pop-up-log-out">

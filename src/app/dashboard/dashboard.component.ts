@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { AuthService } from '../auth.service';
+import {environment} from "../../../environment";
 
 interface UserInfoDto {
   userName: string;
@@ -121,7 +122,6 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log('POST request successful:', response);
-          // Оновіть список транзакцій після успішного POST-запиту
           this.getTransactions();
         },
         error => {
@@ -149,9 +149,6 @@ export class DashboardComponent implements OnInit {
   closePopup() {
     this.isPopupOpen = false;
   }
-
-
-
 
   logout() {
     this.authService.logout();

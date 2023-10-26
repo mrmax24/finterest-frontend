@@ -29,5 +29,14 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "files": [
+    "src/main.ts",
+    "src/main.ngtypecheck.ts",
+    // Додайте інші файли, які потрібні для вашого проекту
+  ],
+  "include": [
+    "src/**/*.ts"
+    // Інші шляхи до файлів TypeScript, які ви хочете включити у компіляцію
+  ]
 }
