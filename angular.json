@@ -86,7 +86,12 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/ionicons/dist/svg",
+                "output": "assets/ionicons/svg"
+              }
             ],
             "styles": [
               "src/styles.css"

@@ -265,65 +265,144 @@
             </div>
           </div>
         </div>
-        <div class="table-cell1" *ngFor="let transaction of transactions">
-          <div class="column">
+        <div class="table-cell1" *ngFor="let transaction of transactions; let i = index">
+          <div class="column" *ngIf="showAllRows || i < 6">
             <div class="cell">
               <div class="date">{{ transaction.date }}</div>
             </div>
           </div>
-          <div class="column">
+          <div class="column" *ngIf="showAllRows || i < 6">
             <div class="cell">
               <div class="date7">{{ transaction.account }}</div>
             </div>
           </div>
-          <div class="column2">
+          <div class="column2" *ngIf="showAllRows || i < 6">
             <div class="cell2">
               <b class="date">{{ transaction.categoryName }}</b>
             </div>
           </div>
-          <div class="column">
+          <div class="column" *ngIf="showAllRows || i < 6">
             <div class="cell">
               <div class="date1">{{ transaction.note }}</div>
             </div>
           </div>
-          <div class="column10">
+          <div class="column10" *ngIf="showAllRows || i < 6">
             <div class="cell4">
               <div class="date">-₴{{ transaction.amount }}</div>
             </div>
           </div>
-
-
-
-          <div class="column11">
+          <div class="column11" *ngIf="showAllRows || i < 6">
             <div class="cell4">
-                <button class="date11" id="date" (click)="openPopup()">Edit</button>
+                <button class="date11" id="date" (click)="openPopup(transaction.transactionId)">Edit</button>
             </div>
           </div>
         </div>
       </div>
+        <div class="view-all" *ngIf="!showAllRows && transactions.length > 6">
+          <button (click)="showAll()">View All</button>
+        </div>
 
-          <div class="popup-overlay popup-styles" *ngIf="isPopupOpen">
+
+
+        <div class="popup-overlay popup-styles" *ngIf="showAllTransactions">
+          <div class="pop-up-edit">
+            <button (click)="closeAll()">Close</button>
+            <div class="transactions">
+              <div class="table-cell">
+                <div class="column">
+                  <div class="cell">
+                    <div class="date">Date</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="cell">
+                    <div class="date1">Account</div>
+                  </div>
+                </div>
+                <div class="column2">
+                  <div class="cell2">
+                    <div class="date">Category</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="cell">
+                    <div class="date1">Note</div>
+                  </div>
+                </div>
+                <div class="column4">
+                  <div class="cell4">
+                    <div class="date">Amount</div>
+                  </div>
+                </div>
+                <div class="column4">
+                  <div class="cell4">
+                    <div class="date">Edit</div>
+                  </div>
+                </div>
+              </div>
+              <div class="table-cell1" *ngFor="let transaction of transactions; let i = index">
+                <div class="column">
+                  <div class="cell">
+                    <div class="date">{{ transaction.date }}</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="cell">
+                    <div class="date7">{{ transaction.account }}</div>
+                  </div>
+                </div>
+                <div class="column2">
+                  <div class="cell2">
+                    <b class="date">{{ transaction.categoryName }}</b>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="cell">
+                    <div class="date1">{{ transaction.note }}</div>
+                  </div>
+                </div>
+                <div class="column10">
+                  <div class="cell4">
+                    <div class="date">-₴{{ transaction.amount }}</div>
+                  </div>
+                </div>
+                <div class="column11">
+                  <div class="cell4">
+                    <button class="date11" id="date" (click)="openPopup(transaction.transactionId)">Edit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="popup-overlay popup-styles" *ngIf="isPopupOpen">
               <div class="pop-up-edit">
                 <div class="hexit3">
                   <div class="htxt3">
                     <div class="h21">Edit transaction</div>
                     <div class="change-transaction-data">Change transaction data</div>
                   </div>
-                  <button class="buttons-exit" (click)="closePopup()"></button>
+                  <button class="buttons-exit" (click)="closePopup()">
+                    <div class="icon-exit9">
+                      <img src="/assets/close-outline.svg">
+                    </div>
+                  </button>
                 </div>
 
 
-              <form class="add-a-transaction1" method="post" id="edit" action="${pageContext.request.contextPath}/dashboard/edit/${transaction.id}">
+              <form class="add-a-transaction1" method="post" id="edit">
                 <div class="dropdowns2">
                   <div class="labeldropdown6">
                     <b class="label4">From account</b>
-                    <select class="dropdown6" name="account" size="{58}">
+                    <select class="dropdown6" [(ngModel)]="transactionRequestDto.accountId" name="account" size="{58}">
+                      <option *ngFor="let account of userInfo.userAccounts" [value]="account.id">{{ account.name }}</option>
                     </select>
                   </div>
                   <div class="labeldropdown6">
                     <b class="label4">Category</b>
-                    <select class="dropdown6" name="category">
-
+                    <select class="dropdown6" [(ngModel)]="transactionRequestDto.categoryId" name="category">
+                      <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
                     </select>
                   </div>
                 </div>
@@ -336,14 +415,14 @@
                         type="text"
                         name="amount"
                         placeholder="0.00"
+                        [(ngModel)]="transactionRequestDto.amount"
                         maxlength
                         minlength
-
                       />
                     </div>
                     <div class="labeldropdown8">
                       <b class="placeholder5">Currency</b>
-                      <select class="dropdown8" name="currency">
+                      <select class="dropdown8" name="currency" [(ngModel)]="transactionRequestDto.currency">
                         <option value="UAH">UAH</option>
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
@@ -358,6 +437,7 @@
                         type="text"
                         name="note"
                         placeholder="Write your note"
+                        [(ngModel)]="transactionRequestDto.note"
                         maxlength
                         minlength
                       />
@@ -373,14 +453,13 @@
                         minlength
                         id="current-date"
                         current-date="date"
+                        [(ngModel)]="transactionRequestDto.date"
                       />
                     </div>
                   </div>
-                  <button class="buttons-primary" type="submit">Save</button>
+                  <button (click)="editTransaction()" class="buttons-primary">Save</button>
                 </div>
               </form>
-
-
                 <button class="buttons-delete" type="submit">Delete transaction</button>
             </div>
           </div>

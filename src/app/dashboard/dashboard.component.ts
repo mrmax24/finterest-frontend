@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { AuthService } from '../auth.service';
 import {environment} from "../../../environment";
 
+
 interface UserInfoDto {
   userName: string;
   currentBalance: string;
@@ -22,6 +23,7 @@ interface TransactionCategoryDto {
 }
 
 interface TransactionRequestDto {
+  id: number,
   accountId: number;
   categoryId: number;
   amount: string;
@@ -31,6 +33,7 @@ interface TransactionRequestDto {
 }
 
 interface TransactionsListDto {
+  transactionId : number
   date: string;
   account: string;
   categoryName: string;
@@ -46,6 +49,11 @@ interface TransactionsListDto {
 
 export class DashboardComponent implements OnInit {
   isPopupOpen: boolean = false;
+  editingTransactionId: number = 0;
+  showAllRows: boolean = false;
+  showAllTransactions: boolean = false;
+  displayedTransactionIds: number[] = [];
+
 
 
   userInfo: UserInfoDto = {
@@ -60,6 +68,7 @@ export class DashboardComponent implements OnInit {
 
 
   transactionRequestDto: TransactionRequestDto = {
+    id: 0,
     accountId: 0,
     categoryId: 0,
     amount: '',
@@ -105,6 +114,7 @@ export class DashboardComponent implements OnInit {
 
   addTransaction() {
     const transactionsData: TransactionRequestDto = {
+      id: this.editingTransactionId,
       accountId: +this.transactionRequestDto.accountId,
       categoryId: +this.transactionRequestDto.categoryId,
       amount: this.transactionRequestDto.amount,
@@ -131,6 +141,37 @@ export class DashboardComponent implements OnInit {
         });
   }
 
+  editTransaction() {
+    const transactionsData: TransactionRequestDto = {
+      id: this.editingTransactionId,
+      accountId: +this.transactionRequestDto.accountId,
+      categoryId: +this.transactionRequestDto.categoryId,
+      amount: this.transactionRequestDto.amount,
+      currency: this.transactionRequestDto.currency,
+      note: this.transactionRequestDto.note,
+      date: this.transactionRequestDto.date
+    };
+
+    console.log('transactionsData:', transactionsData);
+
+    const headers = this.authService.getAuthorizationHeader('application/json');
+    const body = JSON.stringify(transactionsData);
+    const serverUrl = environment.serverUrl;
+    this.http.post<any>(`${serverUrl}/edit-transaction`, body, { headers })
+      .subscribe(
+        (response) => {
+          console.log('PUT request successful:', response);
+          this.getTransactions();
+          this.isPopupOpen = false;
+        },
+        (error) => {
+          console.error('PUT request error:', error);
+          if (error instanceof HttpErrorResponse) {
+            // Обробка помилок
+          }
+        });
+  }
+
     getTransactions() {
       const headers = this.authService.getAuthorizationHeader();
       const serverUrl = environment.serverUrl;
@@ -141,13 +182,23 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-  openPopup() {
+  openPopup(transactionId : number) {
     this.isPopupOpen = true;
+    this.editingTransactionId = transactionId;
     console.log('Popup should open');
   }
 
   closePopup() {
     this.isPopupOpen = false;
+  }
+
+  showAll() {
+    this.displayedTransactionIds = this.transactions.map(transaction => transaction.transactionId);
+    this.showAllTransactions = true;
+  }
+
+  closeAll() {
+    this.showAllTransactions = false;
   }
 
   logout() {

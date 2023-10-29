@@ -333,7 +333,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--gap-29xl);
-  background-image: url('/frontend/src/assets/login@3x.png');
+  background-image: url('src/assets/login@3x.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;

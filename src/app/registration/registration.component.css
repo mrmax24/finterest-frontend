@@ -367,7 +367,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--gap-29xl);
-  background-image: url('/frontend/src/assets/register@3x.jpg');
+  background-image: url('src/assets/register@3x.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;

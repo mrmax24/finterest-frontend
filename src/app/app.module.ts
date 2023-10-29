@@ -8,6 +8,7 @@ import {RegistrationComponent} from "./registration/registration.component";
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditPopupComponent } from './edit-popup/edit-popup.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { EditPopupComponent } from './edit-popup/edit-popup.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    IonicModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
