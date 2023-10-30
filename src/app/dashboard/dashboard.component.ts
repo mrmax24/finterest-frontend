@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { AuthService } from '../auth.service';
 import {environment} from "../../../environment";
@@ -40,6 +40,10 @@ interface TransactionsListDto {
   note: string;
   amount: number;
 }
+interface AccountRequestDto {
+  name: string;
+  balance: string
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -52,9 +56,12 @@ export class DashboardComponent implements OnInit {
   editingTransactionId: number = 0;
   showAllRows: boolean = false;
   showAllTransactions: boolean = false;
+  openLogOutPopup: boolean = false;
+  openAddAccountPopup: boolean = false;
+  isDropdownOpen = false;
   displayedTransactionIds: number[] = [];
-
-
+  selectedOption: string | undefined;
+  @Input() options: string[] = [];
 
   userInfo: UserInfoDto = {
     userName: '',
@@ -77,6 +84,11 @@ export class DashboardComponent implements OnInit {
     date: ''
 }
 
+  accountRequestDto: AccountRequestDto = {
+    name: "",
+    balance: ""
+  }
+
   constructor(
     private http: HttpClient,
     private authService: AuthService,
@@ -94,7 +106,7 @@ export class DashboardComponent implements OnInit {
           this.userInfo.userName = response.userName;
           this.userInfo.currentBalance = response.currentBalance;
           this.userInfo.userAccounts = response.userAccounts;
-            this.userInfo.categories = response.categories;
+          this.userInfo.categories = response.categories;
           this.cdr.detectChanges();
         } else {
           console.error('Response is undefined');
@@ -172,6 +184,22 @@ export class DashboardComponent implements OnInit {
         });
   }
 
+  deleteTransaction() {
+    const id = this.editingTransactionId;
+    const headers = this.authService.getAuthorizationHeader('application/json');
+    const serverUrl = environment.serverUrl;
+    this.http.post<any>(`${serverUrl}/delete-transaction/${id}`, null, { headers })
+      .subscribe(
+        (response) => {
+          console.log('DELETE request successful:', response);
+          this.getTransactions();
+          this.isPopupOpen = false;
+        },
+        (error) => {
+          console.error('DELETE request error:', error);
+        });
+  }
+
     getTransactions() {
       const headers = this.authService.getAuthorizationHeader();
       const serverUrl = environment.serverUrl;
@@ -181,6 +209,36 @@ export class DashboardComponent implements OnInit {
           console.log(data)
         });
     }
+
+    createAccount() {
+    const accountData: AccountRequestDto = {
+      name: this.accountRequestDto.name,
+      balance: this.accountRequestDto.balance
+    }
+      const serverUrl = environment.serverUrl;
+      const headers = this.authService.getAuthorizationHeader();
+      const body = JSON.stringify(accountData);
+      this.http.post<any>(`${serverUrl}/create-account`, body, {headers})
+        .subscribe(response => {
+        console.log('POST request successful:', response);
+        console.log(body);
+        this.getAccounts();
+        this.openAddAccountPopup = false;
+      },
+      (error) => {
+        console.error('POST request error:', error);
+      });
+    }
+
+  getAccounts() {
+    const serverUrl = environment.serverUrl;
+    const headers = this.authService.getAuthorizationHeader();
+    this.http.get<AccountDto[]>(`${serverUrl}/accounts`, {headers})
+      .subscribe(data => {
+        this.userInfo.userAccounts = data;
+        console.log(data);
+      });
+  }
 
   openPopup(transactionId : number) {
     this.isPopupOpen = true;
@@ -199,6 +257,31 @@ export class DashboardComponent implements OnInit {
 
   closeAll() {
     this.showAllTransactions = false;
+  }
+
+  showLogOutPopup() {
+    this.openLogOutPopup = true;
+  }
+
+  hideLogOutPopup() {
+    this.openLogOutPopup = false;
+  }
+
+  showAddAccountPopup() {
+    this.openAddAccountPopup = true;
+  }
+
+  hideAddAccountPopup() {
+    this.openAddAccountPopup = false;
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  selectOption(option: string) {
+    this.selectedOption = option;
+    this.isDropdownOpen = false;
   }
 
   logout() {

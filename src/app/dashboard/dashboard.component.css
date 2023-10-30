@@ -373,6 +373,26 @@
   justify-content: space-between;
 }
 
+.dropdown-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Стилізуємо елементи списку */
+.dropdown-list li {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Змінюємо розмір випадаючого списку на основі розміру dropdown */
+.dropdown-list {
+  width: 100%; /* Робимо ширину такою ж, як у dropdown */
+  max-height: 150px; /* Задаємо максимальну висоту, якщо список стає занадто великим */
+  overflow-y: auto; /* Додаємо прокрутку, якщо список не поміщається в максимальну висоту */
+}
+
 .dropdowns,
 .labeldropdown {
   display: flex;
@@ -1370,6 +1390,29 @@
   font-family: var(--main-med);
   padding-bottom: 75px;
 }
+.pop-up-full-list {
+  padding: 2rem;
+  padding-bottom: 2rem;
+  padding-top: 42px;
+  padding-right: 0px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  text-align: left;
+  font-size: var(--h1-size);
+  color: var(--gray-100);
+  font-family: var(--main-med);
+  width: 800px;
+  background-color: white;
+  height: 600px;
+  overflow: auto;
+  scrollbar-width: thin;
+  border-radius: var(--br-13xl);
+}
+.pop-up-full-list::-webkit-scrollbar {
+  width: 0px;
+}
 
 @media screen and (max-width: 420px) {
   .labeldropdown6 {
@@ -1434,7 +1477,7 @@
   overflow: hidden;
   flex-shrink: 0;
 }
-img[_ngcontent-ng-c1422693622] {
+img[_ngcontent-ng-c1228909122] {
   filter: brightness(100%);
 }
 
@@ -1583,6 +1626,15 @@ input[type="number"] {
   background-color: rgba(113, 113, 113, 0.2);
   align-items: center;
   justify-content: center;
+}
+.view-all-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  font-size: var(--secondary-med-size);
+  color: var(--primary-blue1);
 }
 
 

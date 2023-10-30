@@ -82,11 +82,11 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      const expirationTime = payload.exp * 1000; // Переводимо в мілісекунди
+      const expirationTime = payload.exp * 1000;
       const currentTime = Date.now();
       return currentTime > expirationTime;
     }
-    return true; // Повертаємо true, якщо токен відсутній
+    return true;
   }
 
 }

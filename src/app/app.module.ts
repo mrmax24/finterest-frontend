@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditPopupComponent } from './edit-popup/edit-popup.component';
 import { IonicModule } from '@ionic/angular';
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { IonicModule } from '@ionic/angular';
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(),
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
